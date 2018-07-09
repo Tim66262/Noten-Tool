@@ -1,0 +1,169 @@
+{% extends './base.html' %}
+{% block backIcon %}
+    <li><a href="{% url 'semesters' id year %}"><i class="material-icons" style="font-size: 3rem">arrow_back</i></a></li>
+{% endblock %}
+{% block icons %}
+    <li><a href="{% url 'logout' %}"><i class="material-icons" style="font-size: 3rem">power_settings_new</i></a></li>
+{% endblock %}
+{% block body %}
+    <!--Basic Script to enable scroll-->
+    <script>
+        document.body.style.overflowY = "scroll";
+    </script>
+
+    {% if notenliste %}
+    <ul class="collapsible">
+        {% for fach in notenliste %}
+        <li>
+            <div class="collapsible-header"><i class="material-icons">
+                {% if fach.average == None %}
+                not_interested
+                {% elif fach.average < 3.5 %}
+                sentiment_very_dissatisfied
+                {% elif fach.average >= 3.5 and fach.average < 4 %}
+                sentiment_dissatisfied
+                {% elif fach.average >= 4 and fach.average < 4.8 %}
+                sentiment_neutral
+                {% elif fach.average >= 4.8 and fach.average < 5.5 %}
+                sentiment_satisfied
+                {% elif fach.average >= 5.5 %}
+                sentiment_very_satisfied
+                {% else %}
+                not_interested
+                {% endif %}
+            </i><span style="width: 200px">{{fach.name}}</span><span>{{ fach.average }}</span>
+            </div>
+            {% for note in fach.gradeList %}
+            <div class="collapsible-body no-padding">
+                {% if isOwner %}
+                <div class="row" style="margin-bottom: 0px; padding-right: 1rem; padding-left: 1rem; padding-top: 15px">
+                    <form class="col s12" action="/updategrade/{{ id }}/{{ year }}/{{ semester }}/{{ fach.name }}/{{ note.wert }}/{{ note.gewichtung }}/" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="input-field col s5">
+                                <input id="note" name="wert" type="number" value="{{ note.wert }}" min="1" max="6" step="0.1">
+                                <label for="note">Note</label>
+                            </div>
+                            <div class="input-field col s5">
+                                <select name="gewichtung">
+                                    {% if note.gewichtung == 0.5 %}
+                                      <option value="0.5" selected="selected">0.5</option>
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                    {% elif note.gewichtung == 1 %}
+                                      <option value="0.5">0.5</option>
+                                      <option value="1" selected="selected">1</option>
+                                      <option value="2">2</option>
+                                    {% elif note.gewichtung == 2 %}
+                                      <option value="0.5">0.5</option>
+                                      <option value="1">1</option>
+                                      <option value="2" selected="selected">2</option>
+                                    {% else %}
+                                      <option value="0.5">0.5</option>
+                                      <option value="1" selected="selected">1</option>
+                                      <option value="2">2</option>
+                                    {% endif%}
+                                </select>
+                                <label>Gewichtung</label>
+                                <script>
+                                    $(document).ready(function(){
+                                        $('select').formSelect();
+                                    });
+                                </script>
+                            </div>
+                            <div class="input-field col s2">
+                                <a href="{% url 'deleteGrade' id year semester fach.name note.wert note.gewichtung %}" class="waves-effect waves-light btn red lighten-2"
+                                   title="Delete the grade"><i class="material-icons" style="font-size: 2rem">delete</i></a>
+                                <button type="submit" class="modal-trigger waves-effect waves-light btn red lighten-2"
+                                   title="Update the grade"><i class="material-icons" style="font-size: 2rem">mode_edit</i></button>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                    {% else %}
+                        <div class="row" style="margin-bottom: 0px">
+                            <div class="input-field col s6">
+                                <p>Note: {{ note.wert }}</p>
+                            </div>
+                            <div class="input-field col s6">
+                                <p>Gewichtung: {{ note.gewichtung }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+            </div>
+            {% endfor %}
+            {% if isOwner %}
+            <div class="collapsible-body no-padding">
+                <div class="row" style="margin-bottom: 0px; padding-right: 1rem; padding-left: 1rem; padding-top: 15px">
+                    <div class="input-field col s10">
+                    </div>
+                    <div class="input-field col s2">
+                        <button data-target="modalAddGrade{{ fach.name }}" class="modal-trigger waves-effect waves-light btn red lighten-2"
+                                title="Add an grade to the {{ fach.name }} school subject"><i class="material-icons" style="font-size: 2rem">add</i>
+                        </button>
+                        <div id="modalAddGrade{{ fach.name }}" class="modal">
+                            <div class="modal-content">
+                                <form action="/addgrade/{{ id }}/{{ year }}/{{ semester }}/{{ fach.name }}/" method="post">
+                                    {% csrf_token %}
+                                    <div class="input-field col s12">
+                                    <select name="massvalue">
+                                      <option value="0.5">0.5</option>
+                                      <option value="1" selected="selected">1</option>
+                                      <option value="2">2</option>
+                                    </select>
+                                    <label>Enter the value of the Mass</label>
+                                  </div>
+                                    <div class="input-field col s12">
+                                        <label for="gradevalue">Enter the value of the Grade</label>
+                                        <input type="number" name="gradevalue" id="gradevalue" value="4" min="1" max="6" step="0.1">
+                                    </div>
+                                    <button type="submit" class="waves-effect waves-light btn red lighten-1"><i
+                                            class="material-icons left">save</i>Save
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <script>
+                            $(document).ready(function(){
+                                $('select').formSelect();
+                            });
+                        </script>
+                        <a href="{% url 'deleteSubjects' id year semester fach.name %}" class="waves-effect waves-light btn red lighten-2"
+                            title="Delete the {{ fach.name }} school subject"><i class="material-icons" style="font-size: 2rem">delete</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% if isOwner %}
+    <button data-target="modalAddSubject" class="btn modal-trigger waves-effect waves-light red lighten-2 right"
+            style="margin-right: 1%; margin-top: 4px"><i class="material-icons" style="font-size: 2rem"
+            title="Add an new Subject">add</i></button>
+    <div id="modalAddSubject" class="modal">
+        <div class="modal-content">
+            <form action="/addsubject/{{ id }}/{{ year }}/{{ semester }}/" method="post">
+                {% csrf_token %}
+                <label for="subjectname">Enter the name of the Subject</label>
+                <input type="text" name="subjectname" id="subjectname" min="1">
+                <button type="submit" class="waves-effect waves-light btn red lighten-1"><i
+                        class="material-icons left">save</i>Save
+                </button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+    <script>
+        $(document).ready(function () {
+            $('.modal').modal();
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.collapsible').collapsible();
+        });
+    </script>
+{% endblock %}

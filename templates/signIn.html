@@ -1,0 +1,20 @@
+{% extends './base.html' %}
+{% block icons %}
+    <li><a href="{% url 'signIn' %}"><i class="material-icons" style="font-size: 3rem">account_circle</i></a></li>
+{% endblock %}
+{% block body %}
+    {% if message %}
+        <script>
+            alert('{{ message }}');
+        </script>
+    {% endif %}
+    <div class="row">
+        <form action="/postsign/" method="post" class="col s12">
+            {% csrf_token %}
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="validate">
+                <label for="password">Password</label><input type="password" id="password" name="password" class="validate">
+                <button class="waves-effect waves-light btn red lighten-2" type="submit">SignIn</button>
+        </form>
+    </div>
+{% endblock %}
