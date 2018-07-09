@@ -6,6 +6,15 @@
     <li><a href="{% url 'logout' %}"><i class="material-icons" style="font-size: 3rem">power_settings_new</i></a></li>
 {% endblock %}
 {% block body %}
+    <!--Error Message-->
+    {% if messages %}
+        {% for message in messages %}
+            <script>
+                alert('{{ message }}');
+            </script>
+        {% endfor %}
+    {% endif %}
+
     <!--Basic Script to enable scroll-->
     <script>
         document.body.style.overflowY = "scroll";
@@ -140,8 +149,8 @@
     </ul>
     {% endif %}
     {% if isOwner %}
-    <button data-target="modalAddSubject" class="btn modal-trigger waves-effect waves-light red lighten-2 right"
-            style="margin-right: 1%; margin-top: 4px"><i class="material-icons" style="font-size: 2rem"
+    <button data-target="modalAddSubject" class="btn modal-trigger btn-floating btn-large waves-effect waves-light red lighten-1"
+            style="position: fixed; bottom: 0px; right: 0px; margin-bottom: 10px; margin-right: 10px""><i class="material-icons" style="font-size: 2rem"
             title="Add an new Subject">add</i></button>
     <div id="modalAddSubject" class="modal">
         <div class="modal-content">

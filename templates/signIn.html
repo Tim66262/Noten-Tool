@@ -3,11 +3,15 @@
     <li><a href="{% url 'signIn' %}"><i class="material-icons" style="font-size: 3rem">account_circle</i></a></li>
 {% endblock %}
 {% block body %}
-    {% if message %}
-        <script>
-            alert('{{ message }}');
-        </script>
+    <!--Error Message-->
+    {% if messages %}
+        {% for message in messages %}
+            <script>
+                alert('{{ message }}');
+            </script>
+        {% endfor %}
     {% endif %}
+    <!--Form-->
     <div class="row">
         <form action="/postsign/" method="post" class="col s12">
             {% csrf_token %}

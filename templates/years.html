@@ -6,6 +6,15 @@
     <li><a href="{% url 'logout' %}"><i class="material-icons" style="font-size: 3rem">power_settings_new</i></a></li>
 {% endblock %}
 {% block body %}
+    <!--Error Message-->
+    {% if messages %}
+        {% for message in messages %}
+            <script>
+                alert('{{ message }}');
+            </script>
+        {% endfor %}
+    {% endif %}
+    <!--Show all years in a box -->
     {% if years %}
         <div class="row">
             {% for year in years %}
@@ -22,11 +31,11 @@
             {% endfor %}
         </div>
     {% else %}
-        No year detected
+        <p style="text-align: center;">No year detected</p>
     {% endif %}
+    <!--Owner View-->
     {% if isOwner %}
       <button data-target="modal1" class="btn modal-trigger btn-floating btn-large waves-effect waves-light red lighten-1" style="position: fixed; bottom: 0px; right: 0px; margin-bottom: 10px; margin-right: 10px"><i class="material-icons">add</i></button>
-
        <div id="modal1" class="modal">
         <div class="modal-content">
             <form action="/saveyear/" method="post">

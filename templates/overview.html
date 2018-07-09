@@ -3,6 +3,7 @@
     <li><a href="{% url 'logout' %}"><i class="material-icons" style="font-size: 3rem">power_settings_new</i></a></li>
 {% endblock %}
 {% block body %}
+    <!--Show all persons in a box -->
     <div class="row">
     {% for person in people %}
         <a href="{% url 'years' person.id %}">

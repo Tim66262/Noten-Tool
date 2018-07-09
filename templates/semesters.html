@@ -6,6 +6,7 @@
     <li><a href="{% url 'logout' %}"><i class="material-icons" style="font-size: 3rem">power_settings_new</i></a></li>
 {% endblock %}
 {% block body %}
+    <!--Show all semesters in a box -->
     {% if semesters %}
         <div class="row">
             {% for semester in semesters %}

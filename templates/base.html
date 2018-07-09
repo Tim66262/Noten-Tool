@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--Html Basic Stuff-->
     <meta charset="UTF-8">
     <title>NotenTool</title>
+    <!--Mobile Ready-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-        <!-- JQuery -->
+    <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
@@ -13,20 +16,22 @@
      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-      <nav>
-        <div class="nav-wrapper">
-          <a href="{% url 'home' %}" class="brand-logo center">Noten Tool</a>
-            <ul class="left hide-on-med-and-down">
-                {% block backIcon %}
-                {% endblock %}
-            </ul>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                {% block icons %}
-                {% endblock %}
-            </ul>
-        </div>
-      </nav>
-    {% block body %}
-    {% endblock %}
+  <!--Nav Bar with blocks on the left and right side-->
+  <nav>
+    <div class="nav-wrapper">
+      <a href="{% url 'home' %}" class="brand-logo center">Noten Tool</a>
+        <ul class="left">
+            {% block backIcon %}
+            {% endblock %}
+        </ul>
+        <ul id="nav-mobile" class="right">
+            {% block icons %}
+            {% endblock %}
+        </ul>
+    </div>
+  </nav>
+  <!--Block for the Content on the Other Sides-->
+  {% block body %}
+  {% endblock %}
 </body>
 </html>
