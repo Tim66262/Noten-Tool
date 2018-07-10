@@ -80,7 +80,7 @@
                                     });
                                 </script>
                             </div>
-                            <div class="input-field col s2">
+                            <div class="input-field col s2 top-duo">
                                 <a href="{% url 'deleteGrade' id year semester fach.name note.wert note.gewichtung %}" class="waves-effect waves-light btn red lighten-2 top-duo-button"
                                    title="Delete the grade"><i class="material-icons" style="font-size: 2rem">delete</i></a>
                                 <button type="submit" class="modal-trigger waves-effect waves-light btn red lighten-2"
@@ -106,7 +106,7 @@
                 <div class="row collapsible-row-style">
                     <div class="input-field col s10">
                     </div>
-                    <div class="input-field col s2">
+                    <div class="input-field col s2 top-duo">
                         <button data-target="modalAddGrade{{ fach.name }}" class="modal-trigger waves-effect waves-light btn red lighten-2 top-duo-button"
                                 title="Add an grade to the {{ fach.name }} school subject"><i class="material-icons" style="font-size: 2rem">add</i>
                         </button>
