@@ -124,7 +124,7 @@ def subjects(request, id, year, semester):
             if fach.gradeList:
                 fach.calculateAverage()
             else:
-                fach.average = "No Grade Detected"
+                fach.average = "No Grade"
             notenliste.append(fach)
     #Look if the user is the owner
     idtoken = request.session['uid']

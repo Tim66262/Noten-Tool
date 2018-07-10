@@ -1,9 +1,9 @@
 {% extends './base.html' %}
 {% block backIcon %}
-    <li><a href="{% url 'overview' %}"><i class="material-icons" style="font-size: 3rem">arrow_back</i></a></li>
+    <li><a href="{% url 'overview' %}"><i class="material-icons navbar-icons-size">arrow_back</i></a></li>
 {% endblock %}
 {% block icons %}
-    <li><a href="{% url 'logout' %}"><i class="material-icons" style="font-size: 3rem">power_settings_new</i></a></li>
+    <li><a href="{% url 'logout' %}"><i class="material-icons navbar-icons-size">power_settings_new</i></a></li>
 {% endblock %}
 {% block body %}
     <!--Error Message-->
@@ -31,11 +31,11 @@
             {% endfor %}
         </div>
     {% else %}
-        <p style="text-align: center;">No year detected</p>
+        <p class="centeredText">No year detected</p>
     {% endif %}
     <!--Owner View-->
     {% if isOwner %}
-      <button data-target="modal1" class="btn modal-trigger btn-floating btn-large waves-effect waves-light red lighten-1" style="position: fixed; bottom: 0px; right: 0px; margin-bottom: 10px; margin-right: 10px"><i class="material-icons">add</i></button>
+      <button data-target="modal1" class="btn modal-trigger btn-floating btn-large waves-effect waves-light red lighten-1 position-bottom-right"><i class="material-icons">add</i></button>
        <div id="modal1" class="modal">
         <div class="modal-content">
             <form action="/saveyear/" method="post">

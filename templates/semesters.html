@@ -1,9 +1,9 @@
 {% extends './base.html' %}
 {% block backIcon %}
-    <li><a href="{% url 'years' id %}"><i class="material-icons" style="font-size: 3rem">arrow_back</i></a></li>
+    <li><a href="{% url 'years' id %}"><i class="material-icons navbar-icons-size">arrow_back</i></a></li>
 {% endblock %}
 {% block icons %}
-    <li><a href="{% url 'logout' %}"><i class="material-icons" style="font-size: 3rem">power_settings_new</i></a></li>
+    <li><a href="{% url 'logout' %}"><i class="material-icons navbar-icons-size">power_settings_new</i></a></li>
 {% endblock %}
 {% block body %}
     <!--Show all semesters in a box -->
@@ -23,6 +23,6 @@
             {% endfor %}
         </div>
     {% else %}
-        No year detected
+        <p class="centeredText">No year detected</p>
     {% endif %}
 {% endblock %}

@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,10 +15,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
     <!-- Material Icons -->
      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Static CSS-->
+     <link href="{% static 'style.css' %}" rel="stylesheet" type="text/css">
 </head>
 <body>
   <!--Nav Bar with blocks on the left and right side-->
-  <nav>
+  <nav id="navbar-fixed">
     <div class="nav-wrapper">
       <a href="{% url 'home' %}" class="brand-logo center">Noten Tool</a>
         <ul class="left">
@@ -30,6 +33,7 @@
         </ul>
     </div>
   </nav>
+  <div id="navbar-fixed-wrapper"></div>
   <!--Block for the Content on the Other Sides-->
   {% block body %}
   {% endblock %}

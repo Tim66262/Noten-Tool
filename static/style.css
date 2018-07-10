@@ -1,0 +1,61 @@
+/*
+    Basic Styles
+ */
+
+
+.centeredText{
+    text-align: center;
+}
+
+.position-bottom-right{
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    margin-bottom: 10px;
+    margin-right: 10px
+}
+
+/*
+ *
+    Specific Styles
+ *
+ */
+
+
+/* Nav Bar Styles */
+#navbar-fixed{
+    position: fixed;
+    top: 0;
+}
+
+#navbar-fixed-wrapper {
+    margin-top: 65px;
+    width: 100%;
+    display: block;
+}
+
+.navbar-icons-size{
+    font-size: 3rem !important;
+}
+
+
+/* Collapsible Styles */
+.collapsible-row-style{
+    margin-bottom: 0px;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    padding-top: 15px
+}
+
+
+/*
+ *
+    Media Querys
+ *
+ */
+@media (max-width: 915px) {
+    .top-duo-button{
+        margin-top: -12px;
+        margin-bottom: 7px;
+    }
+}

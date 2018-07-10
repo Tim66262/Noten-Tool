@@ -1,9 +1,9 @@
 {% extends './base.html' %}
 {% block backIcon %}
-    <li><a href="{% url 'semesters' id year %}"><i class="material-icons" style="font-size: 3rem">arrow_back</i></a></li>
+    <li><a href="{% url 'semesters' id year %}"><i class="material-icons navbar-icons-size">arrow_back</i></a></li>
 {% endblock %}
 {% block icons %}
-    <li><a href="{% url 'logout' %}"><i class="material-icons" style="font-size: 3rem">power_settings_new</i></a></li>
+    <li><a href="{% url 'logout' %}"><i class="material-icons navbar-icons-size">power_settings_new</i></a></li>
 {% endblock %}
 {% block body %}
     <!--Error Message-->
@@ -45,7 +45,7 @@
             {% for note in fach.gradeList %}
             <div class="collapsible-body no-padding">
                 {% if isOwner %}
-                <div class="row" style="margin-bottom: 0px; padding-right: 1rem; padding-left: 1rem; padding-top: 15px">
+                <div class="row collapsible-row-style">
                     <form class="col s12" action="/updategrade/{{ id }}/{{ year }}/{{ semester }}/{{ fach.name }}/{{ note.wert }}/{{ note.gewichtung }}/" method="post">
                         {% csrf_token %}
                         <div class="row">
@@ -81,7 +81,7 @@
                                 </script>
                             </div>
                             <div class="input-field col s2">
-                                <a href="{% url 'deleteGrade' id year semester fach.name note.wert note.gewichtung %}" class="waves-effect waves-light btn red lighten-2"
+                                <a href="{% url 'deleteGrade' id year semester fach.name note.wert note.gewichtung %}" class="waves-effect waves-light btn red lighten-2 top-duo-button"
                                    title="Delete the grade"><i class="material-icons" style="font-size: 2rem">delete</i></a>
                                 <button type="submit" class="modal-trigger waves-effect waves-light btn red lighten-2"
                                    title="Update the grade"><i class="material-icons" style="font-size: 2rem">mode_edit</i></button>
@@ -103,11 +103,11 @@
             {% endfor %}
             {% if isOwner %}
             <div class="collapsible-body no-padding">
-                <div class="row" style="margin-bottom: 0px; padding-right: 1rem; padding-left: 1rem; padding-top: 15px">
+                <div class="row collapsible-row-style">
                     <div class="input-field col s10">
                     </div>
                     <div class="input-field col s2">
-                        <button data-target="modalAddGrade{{ fach.name }}" class="modal-trigger waves-effect waves-light btn red lighten-2"
+                        <button data-target="modalAddGrade{{ fach.name }}" class="modal-trigger waves-effect waves-light btn red lighten-2 top-duo-button"
                                 title="Add an grade to the {{ fach.name }} school subject"><i class="material-icons" style="font-size: 2rem">add</i>
                         </button>
                         <div id="modalAddGrade{{ fach.name }}" class="modal">
@@ -147,10 +147,12 @@
         </li>
         {% endfor %}
     </ul>
+    {% else %}
+        <p class="centeredText">No Subject dedected</p>
     {% endif %}
     {% if isOwner %}
-    <button data-target="modalAddSubject" class="btn modal-trigger btn-floating btn-large waves-effect waves-light red lighten-1"
-            style="position: fixed; bottom: 0px; right: 0px; margin-bottom: 10px; margin-right: 10px""><i class="material-icons" style="font-size: 2rem"
+    <button data-target="modalAddSubject" class="btn modal-trigger btn-floating btn-large waves-effect waves-light red lighten-1 position-bottom-right"
+    ><i class="material-icons" style="font-size: 2rem"
             title="Add an new Subject">add</i></button>
     <div id="modalAddSubject" class="modal">
         <div class="modal-content">
